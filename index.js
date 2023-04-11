@@ -95,46 +95,10 @@ app.post('/cartes', (req, res) => {
 // Modifier une carte Pokemon à partir de son id dans le fichier pokemonList.json methode PUT
 app.put('/cartes/:id', (req, res) => {
   
-  const idCarte = parseInt(req.params.id);
-  const nomCarte = req.body.nom;
-  const typeCarte = req.body.type;
-  const imageCarte = req.body.imageSrc;
-  
-  fs.readFile('pokemonList.json', 'utf8', (err, data) => {
-    if (err) {
-      console.error(err);
-      res.status(500).send('Erreur serveur');
-      return;
-    }
-    
-    const cartes = JSON.parse(data).cartesPokemon;
-    const carteIndex = cartes.findIndex(carte => carte.id === idCarte);
-    if (carteIndex === -1) {
-      res.status(404).send('Carte Pokemon non trouvée');
-      return;
-    }
-    
-    const carte = cartes[carteIndex];
-    carte.nom = nomCarte || carte.nom;
-    carte.type = typeCarte || carte.type;
-    carte.imageSrc = imageCarte || carte.imageSrc;
-    
-    fs.writeFile('pokemonList.json', JSON.stringify({cartesPokemon: cartes}), (err) => {
-      if (err) {
-        console.error(err);
-        res.status(500).send('Erreur serveur');
-        return;
-      }
-      res.send(carte);
-    });
-  });
-  
 });
 
 // Supprimer une carte Pokemon à partir de son nom dans le fichier pokemonList.json methode DELETE
 app.delete('/cartes/:nom', (req, res) => {
-
-  // Code à écrire
 
 });
 
