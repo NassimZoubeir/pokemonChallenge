@@ -12,6 +12,20 @@
     <body>
       <h1>API Cartes Pokemon</h1>
       
+      <h2>Ajouter une nouvelle carte Pokemon</h2>
+      <form action="/cartes" name="addPoke" method="POST">
+        <label for="nom">Nom</label>
+        <input type="text" id="nom" name="nom" required/>
+        
+        <label for="type">Type</label>
+        <input type="text" id="type" name="type" required/>
+        
+        <label for="imageSrc">Image URL</label>
+        <input type="text" id="imageSrc" name="imageSrc" required/>
+        
+        <button type="submit">Ajouter</button>
+      </form>
+      
       <h2>Afficher une carte Pokemon spécifique</h2>
       <form action="/cartes" name="onePoke" method="GET">
         <label for="nomCarte">Nom</label>
@@ -19,42 +33,7 @@
       
         <button type="submit">Afficher</button>
       </form>
-        <h2>Ajouter une nouvelle carte Pokemon</h2>
-        <form action="/cartes" name="addPoke" method="POST">
-          <label for="nom">Nom</label>
-          <input type="text" id="nom" name="nom" required/>
-    
-          <label for="type">Type</label>
-          <input type="text" id="type" name="type" required/>
-    
-          <label for="imageSrc">Image URL</label>
-          <input type="text" id="imageSrc" name="imageSrc" required/>
-    
-          <button type="submit">Ajouter</button>
-        </form>
 
-        <h2>Modifier une carte Pokemon</h2>
-        <form action="/cartes" name="updatePoke" method="PUT">
-          <label for="nom">Nom</label>
-          <input type="text" id="nom" name="nom" required/>
-    
-          <label for="type">Type</label>
-          <input type="text" id="type" name="type" required/>
-    
-          <label for="imageSrc">Image URL</label>
-          <input type="text" id="imageSrc" name="imageSrc" required/>
-    
-          <button type="submit">Ajouter</button>
-        </form>
-        
-        <h2>Supprimer une carte Pokemon spécifique</h2>
-      <form action="/cartes" name="onePoke" method="DELET">
-        <label for="nomCarte">Nom</label>
-        <input type="text" id="nomCarte" name="nom" />
-      
-        <button type="submit">Supprimer</button>
-      </form>
-    
         <h2>Liste des cartes Pokemon existantes</h2>
         <table>
           <thead>
