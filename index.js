@@ -94,13 +94,72 @@ app.post('/cartes', (req, res) => {
 
 // Modifier une carte Pokemon à partir de son id dans le fichier pokemonList.json methode PUT
 app.put('/cartes/:id', (req, res) => {
-  
+  const carteModifiee = new CartePokemon(req.body.nom, req.body.type, req.body.imageSrc);
+  carteModifiee.id = parseInt(req.params.id);
+
+  fs.readFile('pokemonList.json', 'utf8', (err, data) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Erreur serveur');
+      return;
+    }
+
+    const cartes = JSON.parse(data).cartesPokemon;
+    const indexCarte = cartes.findIndex(carte => carte.id === carteModifiee.id);
+
+    if (indexCarte === -1) {
+      res.status(404).send('Carte non trouvée');
+      return;
+    }
+
+    cartes[indexCarte] = carteModifiee;
+
+    fs.writeFile('pokemonList.json', JSON.stringify({cartesPokemon: cartes}), (err) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send('Erreur serveur');
+        return;
+      }
+
+      res.send(carteModifiee);
+    });
+  });
 });
+
 
 // Supprimer une carte Pokemon à partir de son nom dans le fichier pokemonList.json methode DELETE
-app.delete('/cartes/:nom', (req, res) => {
+app.delete('/cartes/:id', (req, res) => {
+  const idCarte = parseInt(req.params.id);
 
+  fs.readFile('pokemonList.json', 'utf8', (err, data) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Erreur serveur');
+      return;
+    }
+
+    const cartes = JSON.parse(data).cartesPokemon;
+    const indexCarte = cartes.findIndex(carte => carte.id === idCarte);
+
+    if (indexCarte === -1) {
+      res.status(404).send('Carte non trouvée');
+      return;
+    }
+
+    cartes.splice(indexCarte, 1);
+
+    fs.writeFile('pokemonList.json', JSON.stringify({cartesPokemon: cartes}), (err) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send('Erreur serveur');
+        return;
+      }
+
+      res.send(`La carte avec l'ID ${idCarte} a été supprimée.`);
+    });
+  });
 });
+
 
 app.listen(
 3000, () => {
