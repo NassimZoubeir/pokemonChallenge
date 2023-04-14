@@ -119,7 +119,7 @@ app.post('/cartes', (req, res) => {
   });
 });
 
-/* ------------------------------------------ MODIFIER UNE CARTE -----------------------------------------------------*/
+/* ------------------------------------------ MODIFIER UNE CARTE ----------------------------------------------------*/
 
 // Modifier une carte Pokemon à partir de son id dans le fichier pokemonList.json methode PUT
 app.put('/cartes/:id', (req, res) => {
@@ -166,7 +166,7 @@ app.put('/cartes/:id', (req, res) => {
   });
 });
 
-/* ----------------------------------------------- SUPPRIMER UNE CARTE -----------------------------------------*/
+/* -------------------------------------------------- SUPPRIMER UNE CARTE ------------------------------------------------*/
 
 // Supprimer une carte Pokemon à partir de son nom dans le fichier pokemonList.json methode DELETE
 app.delete('/cartes/:id', (req, res) => {
