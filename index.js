@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-/* ---------------------------- RECUPERER TOUTE LES CARTES ----------------*/
+/* -------------------------------------------------- RECUPERER TOUTE LES CARTES ---------------------------------------------------------*/
 
 // Récupérer toutes les cartes Pokemon dans le fichier pokemonList.json methode GET
 app.get('/cartes', (req, res) => {
@@ -48,7 +48,7 @@ app.get('/cartes', (req, res) => {
   });
 });
 
-/* -------------------------- RECUPERER UNE CARTE SPECIFIQUE----------------------*/
+/* ----------------------------------------------- RECUPERER UNE CARTE SPECIFIQUE------------------------------------------------------*/
 
 // Récupérer une carte Pokemon spécifique en utilisant son nom dans le fichier pokemonList.json methode GET
 app.get('/cartes/:nom', (req, res) => {
@@ -78,7 +78,7 @@ app.get('/cartes/:nom', (req, res) => {
   });
 });
 
-/* -------------------------- AJOUTER UNE CARTE --------------------------------*/
+/* ---------------------------------------------- AJOUTER UNE CARTE ------------------------------------------------------------*/
 
 // Ajouter une carte Pokemon dans le fichier pokemonList.json methode POST
 app.post('/cartes', (req, res) => {
@@ -119,7 +119,7 @@ app.post('/cartes', (req, res) => {
   });
 });
 
-/* ----------------------------------- MODIFIER UNE CARTE ----------------------*/
+/* ------------------------------------------ MODIFIER UNE CARTE -----------------------------------------------------*/
 
 // Modifier une carte Pokemon à partir de son id dans le fichier pokemonList.json methode PUT
 app.put('/cartes/:id', (req, res) => {
@@ -166,7 +166,7 @@ app.put('/cartes/:id', (req, res) => {
   });
 });
 
-/* ------------------------------ SUPPRIMER UNE CARTE ------------------------*/
+/* ----------------------------------------------- SUPPRIMER UNE CARTE -----------------------------------------*/
 
 // Supprimer une carte Pokemon à partir de son nom dans le fichier pokemonList.json methode DELETE
 app.delete('/cartes/:id', (req, res) => {
