@@ -1,9 +1,7 @@
 h1 {
     text-align: center;
 }
-body {
-    background-color: #2566c3;
-}
+
 #list {
     text-align: center;
 }
@@ -33,4 +31,7 @@ img {
     max-width: 100px;
     height: auto;
 }
-  
+.add {
+    text-align: center;
+    margin-bottom: 2em;
+}

@@ -11,7 +11,7 @@
   </head>
   <body>
       <h1>API Cartes Pokemon</h1>
-      
+      <div class="add">
       <h2>Ajouter une nouvelle carte Pokemon</h2>
       <form action="/cartes" name="addPoke" method="POST">
         <label for="nom">Nom</label>
@@ -25,14 +25,15 @@
         
         <button type="submit">Ajouter</button>
       </form>
-      
-      <h2>Afficher une carte Pokemon spécifique</h2>
+    </div>
+
+      <!-- <h2>Afficher une carte Pokemon spécifique</h2>
       <form action="/cartes" name="onePoke" method="GET">
         <label for="nomCarte">Nom</label>
         <input type="text" id="nomCarte" name="nom" />
       
         <button type="submit">Afficher</button>
-      </form>
+      </form> -->
 
         <h2 id="list">Liste des cartes Pokemon existantes</h2>
         <table>
