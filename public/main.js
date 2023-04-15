@@ -59,3 +59,75 @@ fetch('/cartes')
   })
   .catch(error => console.error(error)); // On affiche une erreur s'il y a un problème lors de la requête ou de la conversion de la réponse en objet JSON
 
+
+  // ----------------------------- AJOUT POKEMON -----------------------------------
+const form = document.forms.addPoke;
+
+// Ajouter un événement pour intercepter la soumission du formulaire
+form.addEventListener('submit', (event) => {
+  event.preventDefault(); // Empêcher le formulaire de recharger la page
+
+  // Envoyer la requête POST pour ajouter la nouvelle carte
+  fetch('/cartes', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      nom: form.nom.value,
+      type: form.type.value,
+      imageSrc: form.imageSrc.value
+    })
+  })
+  .then(response => response.json())
+  .then(nouvelleCarte => {
+    // Ajouter la nouvelle carte à la liste des cartes existantes
+    const tableBody = document.getElementById('pokemonList');
+    const row = document.createElement('tr');
+
+    const nameCell = document.createElement('td');
+    nameCell.textContent = nouvelleCarte.nom;
+    row.appendChild(nameCell);
+
+    const typeCell = document.createElement('td');
+    typeCell.textContent = nouvelleCarte.type;
+    row.appendChild(typeCell);
+
+    const imageCell = document.createElement('td');
+    const image = document.createElement('img');
+    image.src = nouvelleCarte.imageSrc;
+    imageCell.appendChild(image);
+    row.appendChild(imageCell);
+
+    const actionCell = document.createElement('td');
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Supprimer';
+    deleteButton.addEventListener('click', () => {
+      const cardId = nouvelleCarte.id;
+      fetch(`/cartes/${cardId}`, {
+        method: 'DELETE'
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Une erreur est survenue lors de la suppression de la carte.');
+        }
+        // Si la suppression a réussi, supprimer la ligne de la table correspondante
+        const cardRow = deleteButton.parentNode.parentNode;
+        cardRow.parentNode.removeChild(cardRow);
+        alert(`La carte avec l'ID ${cardId} a été supprimée.`);
+      })
+      .catch(error => {
+        console.error(error);
+        alert(error.message);
+      });
+    });
+    actionCell.appendChild(deleteButton);
+    row.appendChild(actionCell);
+
+    tableBody.appendChild(row);
+
+    // Réinitialiser les champs du formulaire
+    form.reset();
+  })
+  .catch(error => console.error(error));
+});
