@@ -26,13 +26,16 @@
         <button type="submit">Ajouter</button>
       </form>
     </div>
-
-      <h2>Afficher une carte Pokemon spécifique</h2>
-      <form action="/cartes" name="onePoke" method="GET">
-        <label for="nomCarte">Nom</label>
-        <input type="text" id="nomCarte" name="nom" />
-        <button type="submit">Afficher</button>
-      </form>
+    <div class="onepoke">
+    <h2>Afficher une carte Pokemon spécifique</h2>
+    <form action="/cartes" name="onePoke" method="GET">
+      <label for="nomCarte">Nom</label>
+      <input type="text" id="nomCarte" name="nom" />
+      <button type="submit">Afficher</button>
+    </form>
+    <div id="pokemonInfo"></div>
+    </div>
+    
 
         <h2 id="list">Liste des cartes Pokemon existantes</h2>
         <table>

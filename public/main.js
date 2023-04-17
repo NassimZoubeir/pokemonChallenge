@@ -134,3 +134,47 @@ form.addEventListener('submit', (event) => {
 });
 // --------------------------------------------------- AFFICHER UN POKEMON SPECIFIQUE -----------------------------------------------------------------------------------
 
+// On récupère l'élément du DOM avec l'ID "pokemonInfo"
+const pokemonInfo = document.getElementById('pokemonInfo');
+
+// On écoute l'événement "submit" sur le formulaire
+document.querySelector('form[name="onePoke"]').addEventListener('submit', event => {
+  event.preventDefault(); // On empêche le formulaire de se soumettre
+
+  // On envoie une requête GET vers l'URL '/cartes' qui doit renvoyer un tableau d'objets "cartes"
+  fetch('/cartes')
+    .then(response => response.json()) // On convertit la réponse en objet JSON
+    .then(cartes => {
+      // On récupère le nom du Pokémon entré dans le formulaire
+      const pokemonName = document.getElementById('nomCarte').value;
+
+      // On cherche le Pokémon dans le tableau "cartes"
+      const pokemon = cartes.find(carte => carte.nom === pokemonName);
+
+      if (pokemon) {
+        // On crée une nouvelle image avec la source de l'image du Pokémon
+        const image = document.createElement('img');
+        image.src = pokemon.imageSrc;
+
+        // On crée un nouveau paragraphe pour afficher le nom du Pokémon
+        const name = document.createElement('p');
+        name.textContent = `Nom : ${pokemon.nom}`;
+
+        // On crée un nouveau paragraphe pour afficher le type du Pokémon
+        const type = document.createElement('p');
+        type.textContent = `Type : ${pokemon.type}`;
+
+        // On vide le contenu du div "pokemonInfo" s'il y a déjà des informations affichées
+        pokemonInfo.innerHTML = '';
+
+        // On ajoute les informations du Pokémon dans le div "pokemonInfo"
+        pokemonInfo.appendChild(image);
+        pokemonInfo.appendChild(name);
+        pokemonInfo.appendChild(type);
+      } else {
+        // Si le Pokémon n'a pas été trouvé, on affiche un message d'erreur
+        pokemonInfo.textContent = 'Pokémon non trouvé.';
+      }
+    })
+    .catch(error => console.error(error));
+});
