@@ -11,49 +11,49 @@
   </head>
   <body>
       <h1>API Cartes Pokemon</h1>
+      
+      <div class="onepoke">
+        <h2>Afficher une carte Pokemon spécifique</h2>
+        <form action="/cartes" name="onePoke" method="GET">
+          <label for="nomCarte">Nom</label>
+          <input type="text" id="nomCarte" name="nom" />
+          <button type="submit">Afficher</button>
+        </form>
+        <div id="pokemonInfo"></div>
+      </div>
+      
       <div class="add">
-      <h2>Ajouter une nouvelle carte Pokemon</h2>
-      <form action="/cartes" name="addPoke" method="POST">
-        <label for="nom">Nom</label>
-        <input type="text" id="nom" name="nom" required/>
-        
-        <label for="type">Type</label>
-        <input type="text" id="type" name="type" required/>
-        
-        <label for="imageSrc">Image URL</label>
-        <input type="text" id="imageSrc" name="imageSrc" required/>
-        
-        <button type="submit">Ajouter</button>
-      </form>
-    </div>
-    <div class="onepoke">
-    <h2>Afficher une carte Pokemon spécifique</h2>
-    <form action="/cartes" name="onePoke" method="GET">
-      <label for="nomCarte">Nom</label>
-      <input type="text" id="nomCarte" name="nom" />
-      <button type="submit">Afficher</button>
-    </form>
-    <div id="pokemonInfo"></div>
-    </div>
-    
-
-        <h2 id="list">Liste des cartes Pokemon existantes</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Image</th>
-              <th>Nom</th>
-              <th>Type</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody id="pokemonList">
-          </tbody>
-        </table>
-        <div class="row text-center" id="card"></div>
-        <div class="error-message"></div>
-        <script src="main.js"></script>
-
+        <h2>Ajouter une nouvelle carte Pokemon</h2>
+        <form action="/cartes" name="addPoke" method="POST">
+          <label for="nom">Nom</label>
+          <input type="text" id="nom" name="nom" required />
+      
+          <label for="type">Type</label>
+          <input type="text" id="type" name="type" required />
+      
+          <label for="imageSrc">Image URL</label>
+          <input type="text" id="imageSrc" name="imageSrc" required />
+      
+          <button type="submit">Ajouter</button>
+        </form>
+      </div>
+      
+      <h2 id="list">Liste des cartes Pokemon existantes</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Nom</th>
+            <th>Type</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="pokemonList">
+        </tbody>
+      </table>
+      <div class="row text-center" id="card"></div>
+      <div class="error-message"></div>
+      <script src="main.js"></script>
 
 </body>
 </html>

@@ -10,7 +10,7 @@ fetch('/cartes')
     // Pour chaque carte dans le tableau "cartes", on crée une nouvelle ligne dans la table
     for (const carte of cartes) {
       const row = document.createElement('tr');
-      
+
       // On crée une nouvelle cellule pour l'image et on y ajoute une balise img avec la source de l'image
       const imageCell = document.createElement('td');
       const image = document.createElement('img');
@@ -38,19 +38,19 @@ fetch('/cartes')
         fetch(`/cartes/${cardId}`, {
           method: 'DELETE'
         })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Une erreur est survenue lors de la suppression de la carte.');
-          }
-          // Si la suppression a réussi, on supprime la ligne de la table correspondante et on affiche une alerte
-          const cardRow = deleteButton.parentNode.parentNode;
-          cardRow.parentNode.removeChild(cardRow);
-          alert(`La carte avec l'ID ${cardId} a été supprimée.`);
-        })
-        .catch(error => {
-          console.error(error);
-          alert(error.message);
-        });
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Une erreur est survenue lors de la suppression de la carte.');
+            }
+            // Si la suppression a réussi, on supprime la ligne de la table correspondante et on affiche une alerte
+            const cardRow = deleteButton.parentNode.parentNode;
+            cardRow.parentNode.removeChild(cardRow);
+            alert(`La carte avec l'ID ${cardId} a été supprimée.`);
+          })
+          .catch(error => {
+            console.error(error);
+            alert(error.message);
+          });
       });
       actionCell.appendChild(deleteButton);
       row.appendChild(actionCell);
@@ -61,8 +61,8 @@ fetch('/cartes')
   })
   .catch(error => console.error(error)); // On affiche une erreur s'il y a un problème lors de la requête ou de la conversion de la réponse en objet JSON
 
-
-  // ----------------------------------------------------- AJOUT POKEMON ---------------------------------------------------------------------------------
+// ----------------------------------------------------- AJOUT POKEMON ---------------------------------------------------------------------------------
+// Sélectionner le formulaire d'ajout de Pokémon
 const form = document.forms.addPoke;
 
 // Ajouter un événement pour intercepter la soumission du formulaire
@@ -75,64 +75,72 @@ form.addEventListener('submit', (event) => {
     headers: {
       'Content-Type': 'application/json'
     },
+    // Récupérer les valeurs des champs du formulaire
     body: JSON.stringify({
       nom: form.nom.value,
       type: form.type.value,
       imageSrc: form.imageSrc.value
     })
   })
-  .then(response => response.json())
-  .then(nouvelleCarte => {
-    // Ajouter la nouvelle carte à la liste des cartes existantes
-    const tableBody = document.getElementById('pokemonList');
-    const row = document.createElement('tr');
+    .then(response => response.json()) // Récupérer la réponse JSON
+    .then(nouvelleCarte => {
+      // Créer une nouvelle ligne pour la nouvelle carte
+      const tableBody = document.getElementById('pokemonList');
+      const row = document.createElement('tr');
 
-    const nameCell = document.createElement('td');
-    nameCell.textContent = nouvelleCarte.nom;
-    row.appendChild(nameCell);
+      // Ajouter l'image de la carte dans une cellule de la ligne
+      const imageCell = document.createElement('td');
+      const image = document.createElement('img');
+      image.src = nouvelleCarte.imageSrc;
+      imageCell.appendChild(image);
+      row.appendChild(imageCell);
 
-    const typeCell = document.createElement('td');
-    typeCell.textContent = nouvelleCarte.type;
-    row.appendChild(typeCell);
+      // Ajouter le nom de la carte dans une cellule de la ligne
+      const nameCell = document.createElement('td');
+      nameCell.textContent = nouvelleCarte.nom;
+      row.appendChild(nameCell);
 
-    const imageCell = document.createElement('td');
-    const image = document.createElement('img');
-    image.src = nouvelleCarte.imageSrc;
-    imageCell.appendChild(image);
-    row.appendChild(imageCell);
+      // Ajouter le type de la carte dans une cellule de la ligne
+      const typeCell = document.createElement('td');
+      typeCell.textContent = nouvelleCarte.type;
+      row.appendChild(typeCell);
 
-    const actionCell = document.createElement('td');
-    const deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Supprimer';
-    deleteButton.addEventListener('click', () => {
-      const cardId = nouvelleCarte.id;
-      fetch(`/cartes/${cardId}`, {
-        method: 'DELETE'
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Une erreur est survenue lors de la suppression de la carte.');
-        }
-        // Si la suppression a réussi, supprimer la ligne de la table correspondante
-        const cardRow = deleteButton.parentNode.parentNode;
-        cardRow.parentNode.removeChild(cardRow);
-        alert(`La carte avec l'ID ${cardId} a été supprimée.`);
-      })
-      .catch(error => {
-        console.error(error);
-        alert(error.message);
+      // Ajouter un bouton de suppression dans une cellule de la ligne
+      const actionCell = document.createElement('td');
+      const deleteButton = document.createElement('button');
+      deleteButton.textContent = 'Supprimer';
+      deleteButton.addEventListener('click', () => {
+        // Récupérer l'ID de la carte et envoyer une requête DELETE
+        const cardId = nouvelleCarte.id;
+        fetch(`/cartes/${cardId}`, {
+          method: 'DELETE'
+        })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Une erreur est survenue lors de la suppression de la carte.');
+            }
+            // Si la suppression a réussi, supprimer la ligne de la table correspondante
+            const cardRow = deleteButton.parentNode.parentNode;
+            cardRow.parentNode.removeChild(cardRow);
+            alert(`La carte avec l'ID ${cardId} a été supprimée.`);
+          })
+          .catch(error => {
+            console.error(error);
+            alert(error.message);
+          });
       });
-    });
-    actionCell.appendChild(deleteButton);
-    row.appendChild(actionCell);
+      actionCell.appendChild(deleteButton);
+      row.appendChild(actionCell);
 
-    tableBody.appendChild(row);
+      // Ajouter la nouvelle ligne à la table
+      tableBody.appendChild(row);
 
-    // Réinitialiser les champs du formulaire
-    form.reset();
-  })
-  .catch(error => console.error(error));
+      // Réinitialiser les champs du formulaire
+      form.reset();
+    })
+    .catch(error => console.error(error)); // Gérer les erreurs
 });
+
 // --------------------------------------------------- AFFICHER UN POKEMON SPECIFIQUE -----------------------------------------------------------------------------------
 
 // On récupère l'élément du DOM avec l'ID "pokemonInfo"
@@ -157,7 +165,7 @@ document.querySelector('form[name="onePoke"]').addEventListener('submit', event 
         const image = document.createElement('img');
         image.src = pokemon.imageSrc;
 
-        // On crée un nouveau paragraphe pour afficher le nom du Pokémon
+        // On crée un nouveau h1 pour afficher le nom du Pokémon
         const name = document.createElement('h1');
         name.textContent = `Nom : ${pokemon.nom}`;
 
