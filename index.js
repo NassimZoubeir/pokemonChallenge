@@ -52,10 +52,10 @@ app.get('/cartes', (req, res) => {
 
 // Récupérer une carte Pokemon spécifique en utilisant son nom dans le fichier pokemonList.json methode GET
 app.get('/cartes/:nom', (req, res) => {
-  
+
   // Récupérer le nom de la carte à partir des paramètres de la requête
   const nomCarte = req.params.nom;
-  
+
   // Lire le contenu du fichier pokemonList.json en utilisant la méthode readFile de Node.js
   fs.readFile('pokemonList.json', 'utf8', (err, data) => {
     if (err) {
@@ -99,14 +99,14 @@ app.post('/cartes', (req, res) => {
     const cartes = JSON.parse(data).cartesPokemon;
 
     // Calculer le nouvel identifiant à attribuer à la nouvelle carte
-    const dernierId = cartes.length > 0 ? cartes[cartes.length-1].id : -1;
+    const dernierId = cartes.length > 0 ? cartes[cartes.length - 1].id : -1;
     nouvelleCarte.id = dernierId + 1;
 
     // Ajouter la nouvelle carte à la liste des cartes existantes
     cartes.push(nouvelleCarte);
 
     // Écrire la nouvelle liste de cartes dans le fichier pokemonList.json en utilisant la méthode writeFile de Node.js
-    fs.writeFile('pokemonList.json', JSON.stringify({cartesPokemon: cartes}), (err) => {
+    fs.writeFile('pokemonList.json', JSON.stringify({ cartesPokemon: cartes }), (err) => {
       if (err) {
         console.error(err);
         // Si une erreur se produit pendant l'écriture du fichier, renvoyer une réponse d'erreur au client
@@ -152,7 +152,7 @@ app.put('/cartes/:id', (req, res) => {
     cartes[indexCarte] = carteModifiee;
 
     // Écrire les cartes mises à jour dans le fichier pokemonList.json
-    fs.writeFile('pokemonList.json', JSON.stringify({cartesPokemon: cartes}), (err) => {
+    fs.writeFile('pokemonList.json', JSON.stringify({ cartesPokemon: cartes }), (err) => {
       if (err) {
         // En cas d'erreur lors de l'écriture du fichier, renvoyer une erreur 500 au client
         console.error(err);
@@ -189,7 +189,7 @@ app.delete('/cartes/:id', (req, res) => {
 
     cartes.splice(indexCarte, 1);  // On supprime la carte du tableau
 
-    fs.writeFile('pokemonList.json', JSON.stringify({cartesPokemon: cartes}), (err) => {  // On écrit le nouveau contenu du fichier
+    fs.writeFile('pokemonList.json', JSON.stringify({ cartesPokemon: cartes }), (err) => {  // On écrit le nouveau contenu du fichier
       if (err) {  // Si une erreur se produit lors de l'écriture du fichier
         console.error(err);  // On affiche l'erreur dans la console
         res.status(500).send('Erreur serveur');  // On renvoie une réponse d'erreur 500 au client
@@ -202,6 +202,6 @@ app.delete('/cartes/:id', (req, res) => {
 });
 
 app.listen(
-3000, () => {
-  console.log('Serveur démarré sur le port 3000');
-});
+  3000, () => {
+    console.log('Serveur démarré sur le port 3000');
+  });
