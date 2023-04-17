@@ -1,4 +1,5 @@
-// ----------------------------------------------- AFFICHAGE DE MA LISTE DE POKEMON + POUVOIR LES SUPPRIMER -----------------------------------------------------------------
+// ----------------------------------------------- AFFICHAGE DE MA LISTE DE POKEMON + BOUTON SUPPRIMER -----------------------------------------------------------------
+
 // On récupère l'élément du DOM avec l'ID "pokemonList"
 const tableBody = document.getElementById('pokemonList');
 
@@ -9,6 +10,13 @@ fetch('/cartes')
     // Pour chaque carte dans le tableau "cartes", on crée une nouvelle ligne dans la table
     for (const carte of cartes) {
       const row = document.createElement('tr');
+      
+      // On crée une nouvelle cellule pour l'image et on y ajoute une balise img avec la source de l'image
+      const imageCell = document.createElement('td');
+      const image = document.createElement('img');
+      image.src = carte.imageSrc;
+      imageCell.appendChild(image);
+      row.appendChild(imageCell);
 
       // On crée une nouvelle cellule pour le nom et on y ajoute le nom de la carte
       const nameCell = document.createElement('td');
@@ -19,13 +27,6 @@ fetch('/cartes')
       const typeCell = document.createElement('td');
       typeCell.textContent = carte.type;
       row.appendChild(typeCell);
-
-      // On crée une nouvelle cellule pour l'image et on y ajoute une balise img avec la source de l'image
-      const imageCell = document.createElement('td');
-      const image = document.createElement('img');
-      image.src = carte.imageSrc;
-      imageCell.appendChild(image);
-      row.appendChild(imageCell);
 
       // On crée une nouvelle cellule pour les actions et on y ajoute un bouton "Supprimer"
       const actionCell = document.createElement('td');
