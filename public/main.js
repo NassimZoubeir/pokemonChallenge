@@ -157,7 +157,7 @@ document.querySelector('form[name="onePoke"]').addEventListener('submit', event 
         image.src = pokemon.imageSrc;
 
         // On crée un nouveau paragraphe pour afficher le nom du Pokémon
-        const name = document.createElement('p');
+        const name = document.createElement('h1');
         name.textContent = `Nom : ${pokemon.nom}`;
 
         // On crée un nouveau paragraphe pour afficher le type du Pokémon
