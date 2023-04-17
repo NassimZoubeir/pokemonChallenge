@@ -1,3 +1,4 @@
+// ----------------------------------------------- AFFICHAGE DE MA LISTE DE POKEMON + POUVOIR LES SUPPRIMER -----------------------------------------------------------------
 // On récupère l'élément du DOM avec l'ID "pokemonList"
 const tableBody = document.getElementById('pokemonList');
 
@@ -60,7 +61,7 @@ fetch('/cartes')
   .catch(error => console.error(error)); // On affiche une erreur s'il y a un problème lors de la requête ou de la conversion de la réponse en objet JSON
 
 
-  // ----------------------------- AJOUT POKEMON -----------------------------------
+  // ----------------------------------------------------- AJOUT POKEMON ---------------------------------------------------------------------------------
 const form = document.forms.addPoke;
 
 // Ajouter un événement pour intercepter la soumission du formulaire
@@ -131,3 +132,5 @@ form.addEventListener('submit', (event) => {
   })
   .catch(error => console.error(error));
 });
+// --------------------------------------------------- AFFICHER UN POKEMON SPECIFIQUE -----------------------------------------------------------------------------------
+
