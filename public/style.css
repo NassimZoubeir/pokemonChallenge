@@ -1,6 +1,10 @@
 h1 {
     text-align: center;
 }
+h1:hover {
+    color: rgb(52, 129, 216);
+    animation: rotate-center 0.6s ease-in-out both;
+}
 
 #list {
     text-align: center;
@@ -56,3 +60,24 @@ img {
 #pokemonInfo p {
     font-size: 1.5em;
 }
+ @-webkit-keyframes rotate-center {
+    0% {
+      -webkit-transform: rotate(0);
+              transform: rotate(0);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+              transform: rotate(360deg);
+    }
+  }
+  @keyframes rotate-center {
+    0% {
+      -webkit-transform: rotate(0);
+              transform: rotate(0);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+              transform: rotate(360deg);
+    }
+  }
+  
