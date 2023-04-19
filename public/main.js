@@ -61,6 +61,52 @@ fetch('/cartes')
   })
   .catch(error => console.error(error)); // On affiche une erreur s'il y a un problème lors de la requête ou de la conversion de la réponse en objet JSON
 
+// -------------------------------------------------- MODIFIER ------------------------------------------------------------------------------------------
+
+//Bouton "Modifier"
+// const editButton = document.createElement('button');
+// editButton.textContent = 'Modifier';
+// editButton.addEventListener('click', () => {
+//   const cardId = carte.id;
+//   const newName = prompt('Entrez le nouveau nom de la carte:');
+//   const newType = prompt('Entrez le nouveau type de la carte:');
+//   const newImageSrc = prompt('Entrez la nouvelle source de l\'image:');
+//   if (newName && newType && newImageSrc) {
+//     fetch(`/cartes/${cardId}`, {
+//       method: 'PUT',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify({
+//         nom: newName,
+//         type: newType,
+//         imageSrc: newImageSrc
+//       })
+//     })
+//       .then(response => {
+//         if (!response.ok) {
+//           throw new Error('Une erreur est survenue lors de la modification de la carte.');
+//         }
+//         // Si la modification a réussi, on met à jour la ligne de la table correspondante et on affiche une alerte
+//         const cardRow = editButton.parentNode.parentNode;
+//         const nameCell = cardRow.querySelector('.name');
+//         const typeCell = cardRow.querySelector('.type');
+//         const imageCell = cardRow.querySelector('.image');
+//         nameCell.textContent = newName;
+//         typeCell.textContent = newType;
+//         imageCell.firstElementChild.src = newImageSrc;
+//         alert(`La carte avec l'ID ${cardId} a été modifiée.`);
+//       })
+//       .catch(error => {
+//         console.error(error);
+//         alert(error.message);
+//       });
+//   }
+// });
+
+// actionCell.appendChild(editButton);
+// row.appendChild(actionCell);
+
 // ----------------------------------------------------- AJOUT POKEMON ---------------------------------------------------------------------------------
 // Sélectionner le formulaire d'ajout de Pokémon
 const form = document.forms.addPoke;
