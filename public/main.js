@@ -204,7 +204,7 @@ document.querySelector('form[name="onePoke"]').addEventListener('submit', event 
       const pokemonName = document.getElementById('nomCarte').value;
 
       // On cherche le Pokémon dans le tableau "cartes"
-      const pokemon = cartes.find(carte => carte.nom === pokemonName);
+      const pokemon = cartes.find(carte => carte.nom.toLowerCase() === pokemonName.toLowerCase());
 
       if (pokemon) {
         // On crée une nouvelle image avec la source de l'image du Pokémon
